@@ -50,5 +50,9 @@
         dest: /etc/yum.repos.d/nginx.repo
     - name: Install nginx
       command: yum install nginx -y
+    - name: Get nginx conf file
+      get_url:
+        url: https://raw.githubusercontent.com/Sentinel-PaaS/cli-configs/main/default.conf
+        dest: /etc/nginx/conf.d/default.conf
     - name: start nginx
       command: systemctl start nginx
