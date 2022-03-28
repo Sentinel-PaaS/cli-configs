@@ -1,19 +1,19 @@
 ---
-- name: Set up environment for Sentinel API 
-  hosts: sentinel 
+- name: Set up environment for Sentinel API
+  hosts: sentinel
   become: true
   gather_facts: False
-  tasks: 
-    - name: Loading tasks 
+  tasks:
+    - name: Loading tasks
       wait_for:
-        timeout: 10 
+        timeout: 10
     - name: Copy ssh key
       copy:
         src: ~/.ssh/ssh-kp.pem
         dest: /home/ec2-user/.ssh/ssh-kp.pem
     - name: Install gcc
       command: sudo yum install -y gcc-c++ make
-    - name: Get node source 
+    - name: Get node source
       shell: curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
       register: result
     - name: Install node
@@ -30,10 +30,25 @@
         global: yes
     - name: Install Sentinel API dependencies
       command: npm install
-      args: 
+      args:
         chdir: /home/ec2-user/sentinel-api-2/
     # TODO: use PM2 to start the API server
     # - name: Start API server
     #   command: pm2 start "npm run dev" --name "Sentinel API"
-    #   args: 
+    #   args:
     #     chdir: /home/ec2-user/sentinel-api-2/
+- name: Install nginx
+  hosts: sentinel
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Update yum utils
+      command: yum install yum-utils
+    - name: Get nginx repo file
+      get_url:
+        url: https://raw.githubusercontent.com/Sentinel-PaaS/cli-configs/main/nginx.repo
+        dest: /etc/yum.repos.d/nginx.repo
+    - name: Install nginx
+      command: yum install nginx -y
+    - name: start nginx
+      command: systemctl start nginx
