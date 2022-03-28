@@ -1,5 +1,5 @@
 #!/bin/bash
-FILE=/home/$USER/.sentinel
+FILE=/home/$USER/.sentinel/config
 
 if [ ! -d "$FILE" ]; then
     echo Creating config files
