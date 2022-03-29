@@ -11,6 +11,10 @@
       copy:
         src: ~/.ssh/ssh-kp.pem
         dest: /home/ec2-user/.ssh/ssh-kp.pem
+    - name: Acquire Auth
+      copy:
+        src: ~/.sentinel/config/token.txt
+        dest: /home/ec2-user/
     - name: Install gcc
       command: sudo yum install -y gcc-c++ make
     - name: Get node source
