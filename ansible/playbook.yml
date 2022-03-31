@@ -36,9 +36,8 @@
       command: npm install
       args:
         chdir: /home/ec2-user/sentinel-api-2/
-    # TODO: use PM2 to start the API server
     # - name: Start API server
-    #   command: pm2 start "npm run dev" --name "Sentinel API"
+    #   command: pm2 start "npm start" --name "Sentinel API"
     #   args:
     #     chdir: /home/ec2-user/sentinel-api-2/
 - name: Install nginx
