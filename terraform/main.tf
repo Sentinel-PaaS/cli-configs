@@ -55,9 +55,6 @@ sudo yum install -y yum-utils
 sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
 sudo yum -y install terraform
 
-# install git
-yum install git -y
-
 echo "AWS_EC2_METADATA_SERVICE_ENDPOINT=http://169.254.169.254" >> /home/ec2-user/.bashrc
 EOF
 }

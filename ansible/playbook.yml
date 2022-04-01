@@ -1,12 +1,14 @@
 ---
 - name: Set up environment for Sentinel API
   hosts: sentinel
-  become: true
+  # become: true
   gather_facts: False
   tasks:
     - name: Loading tasks
       wait_for:
         timeout: 10
+    - name: Install Git
+      command: yum install git -y
     - name: Copy ssh key
       copy:
         src: ~/.ssh/ssh-kp.pem
