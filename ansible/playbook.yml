@@ -8,7 +8,7 @@
       wait_for:
         timeout: 10
     - name: Install Git
-      command: yum install git -y
+      command: sudo yum install git -y
     - name: Copy ssh key
       copy:
         src: ~/.ssh/ssh-kp.pem
