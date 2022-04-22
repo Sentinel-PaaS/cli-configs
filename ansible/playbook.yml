@@ -27,8 +27,8 @@
     - name: Git clone the repository
       retries: 3
       git:
-        repo: https://github.com/Sentinel-PaaS/sentinel-api-2.git
-        dest: /home/ec2-user/sentinel-api-2
+        repo: https://github.com/Sentinel-PaaS/sentinel-api.git
+        dest: /home/ec2-user/sentinel-api
         clone: yes
     - name: Install pm2
       npm:
@@ -37,11 +37,11 @@
     - name: Install Sentinel API dependencies
       command: npm install
       args:
-        chdir: /home/ec2-user/sentinel-api-2/
+        chdir: /home/ec2-user/sentinel-api/
     - name: Start API server
       command: pm2 start "npm start" --name "Sentinel API"
       args:
-        chdir: /home/ec2-user/sentinel-api-2/
+        chdir: /home/ec2-user/sentinel-api/
 - name: Install nginx
   hosts: sentinel
   become: true
